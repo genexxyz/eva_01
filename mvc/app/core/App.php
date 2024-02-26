@@ -17,8 +17,13 @@ class App{
                 $this->controllers = $url[0];
                 unset($url[0]);
             }
+            else{
+                $this->controllers = '_404';
+            }
 
         }
+
+
         require '../app/controllers/' . $this->controllers . '.php';
         $this->controllers = new $this->controllers;
 
