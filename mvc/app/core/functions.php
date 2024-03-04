@@ -1,5 +1,9 @@
 <?php
 
 function show($stuff){
-    print_r(explode("/" , trim($_GET['url'], "/")));
+
+    echo '<pre>';
+    print_r($stuff);
+    echo '</pre>';
+    //print_r(explode("/" , trim($_GET['url'], "/")));
 }
