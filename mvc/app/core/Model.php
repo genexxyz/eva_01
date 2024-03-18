@@ -1,7 +1,7 @@
 <?php
 
 class Model extends Database{
-<<<<<<< HEAD
+
 
 
 
@@ -12,7 +12,7 @@ class Model extends Database{
     }
     public function findAll(){
         $query = "select * from $this->table";
-=======
+
   
   public function __construct(){
     
@@ -24,7 +24,7 @@ class Model extends Database{
    
     public function findAll(){
         $query = "select * from this->table";
->>>>>>> 8241826c17a394fa2a0feee0ef50a5b46c3adb1f
+
         $result = $this->query($query);
 
         if ($result){
