@@ -8,6 +8,8 @@ class Model extends Database{
         $this->table = strtolower(this::class) . 's';
         }
    }
+   
+   
     public function findAll(){
         $query = "select * from this->table";
         $result = $this->query($query);
