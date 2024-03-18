@@ -1,6 +1,7 @@
 <?php
 
 class Model extends Database{
+<<<<<<< HEAD
 
 
 
@@ -11,6 +12,19 @@ class Model extends Database{
     }
     public function findAll(){
         $query = "select * from $this->table";
+=======
+  
+  public function __construct(){
+    
+        if (!property_exists($this, 'table')){
+        $this->table = strtolower(this::class) . 's';
+        }
+   }
+   
+   
+    public function findAll(){
+        $query = "select * from this->table";
+>>>>>>> 8241826c17a394fa2a0feee0ef50a5b46c3adb1f
         $result = $this->query($query);
 
         if ($result){
@@ -25,7 +39,11 @@ class Model extends Database{
         $keys = array_keys($data);
         $keys_not = array_keys($data_not);
 
+<<<<<<< HEAD
         $query = "select *from users $this->table where ";
+=======
+        $query = "select * from this->table where ";
+>>>>>>> 8241826c17a394fa2a0feee0ef50a5b46c3adb1f
 
         foreach ($keys as $key){
             $query .= $key . " = :" . $key . " && ";
@@ -49,6 +67,7 @@ class Model extends Database{
             return false;
         }
     }
+<<<<<<< HEAD
 
     public function insert($data) {
         $columns = implode (', ', array_keys($data));
@@ -87,4 +106,43 @@ class Model extends Database{
         return false;
     }
 
+=======
+    
+    public function insert($data){
+      $columns = implode(', ', array_keys($data));
+      $value = implode(', :', array_keys($data));
+      $query = "insert into this->table ($columns) values (:$values)";
+      
+      $this->query($query, $data);
+      
+      return false;
+    }
+    
+    public function update($id, $data, $column = 'id'){
+      $keys = array_keys($data);
+      $query = "update $this->table set";
+      
+      foreach ($keys as $key){
+        $query .= $key . " = :" . $key . ", ";
+      }
+      
+      $query = trim($query, ", ");
+      
+      $query .= " where $column = :$column";
+      
+      $data[$column] = $id;
+      $this->query($query, $data);
+      
+      return false;
+    }
+    
+    public function delete($id, $column = 'id'){
+        $data[$column] = $id;
+        $query = "delete from $this->table where $column = :$column";
+        
+        $this->query($query, $data);
+        
+        return false;
+    }
+>>>>>>> 8241826c17a394fa2a0feee0ef50a5b46c3adb1f
 }
