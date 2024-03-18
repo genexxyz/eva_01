@@ -10,6 +10,7 @@ class Model extends Database{
         }
     }
     
+    
     public function findAll(){
         $query = "select * from $this->table";
         $result = $this->query($query);
