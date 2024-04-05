@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../css/maroon_theme.min.css">
+    <link rel="stylesheet" href="../css/<?=$_SESSION['theme']?>_theme.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 </head>
 <body class="container bg-light" style=" font-family: Poppins; background-image: url('../public/resources/login_bg.png');  background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     <div class="container-fluid my-5">
         <div class="container d-flex justify-content-center align-items-center">
-            <img src="../public\resources\logo.ico" style="height: 150px;" alt="">
-            <h1 class="text-primary">Bulacan Polytechnic College</h1>
+            <img src="../public/resources/<?= $_SESSION['logo']?>" style="height: 150px;" alt="">
+            <h1 class="text-primary"><?= $_SESSION['schoolname']?></h1>
         </div>
     </div>
     <!-- Display error message if any -->
+    <?php var_dump($_SESSION["setting"]);?>
     <?php if (isset($_SESSION["errors"])) : ?>
         <?php $this->showAlert($_SESSION["errors"], 'danger'); ?>
         <?php unset($_SESSION["errors"]); // Clear the error message from session 
@@ -28,7 +29,7 @@
                     <i class="bi bi-bookmark-check h1 text-white"></i>
                     <div class="row">
                         <p class="text-white fs-4 fw-bold mt-2">Faculty Evaluation System</p>
-                        <p class="text-white">1st Semester A.Y. 2023-2024</p>
+                        <p class="text-white"><?=$_SESSION['semester']?> Semester A.Y. <?=$_SESSION['acadyear']?></p>
                     </div>
                 </div>
             </div>

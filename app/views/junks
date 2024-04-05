@@ -1,0 +1,1 @@
+<?php $this->showAlert('Welcome, ' . $_SESSION["fullName"] . "(Admin)!", 'success');?>

@@ -4,6 +4,12 @@ class Login extends Controller
 {
     public function index()
     {
+        $set = new Setting();
+        $_SESSION['theme'] = $set->getSetting('set_theme');
+        $_SESSION['logo'] = $set->getSetting('set_logo');
+        $_SESSION['schoolname'] = $set->getSetting('set_schoolname');
+        $_SESSION['semester'] = $set->getSetting('set_sem');
+        $_SESSION['acadyear'] = $set->getSetting('set_acadyear');
         $this->view('login');
         
         if (isset($_POST['login_submit'])) {
@@ -33,6 +39,7 @@ class Login extends Controller
 
                     if ($adminResult) {
                         $_SESSION["userId"] = $user;
+                        $_SESSION["fullName"] = $admin->getName($user);
                         header("Location: dashboard");
                         exit();
                     } else {
