@@ -31,7 +31,9 @@ class Login extends Controller
 
                 if ($studentResult) {
                     $_SESSION["userId"] = $user;
-                    header("Location: dashboard");
+                    $_SESSION['currentUser'] = "student";
+                    $_SESSION["fullName"] = $student->getName($user);
+                    header("Location: evaluationpage");
                     exit();
                 } else {
                     $admin = new Admin();
@@ -39,6 +41,7 @@ class Login extends Controller
 
                     if ($adminResult) {
                         $_SESSION["userId"] = $user;
+                        $_SESSION['currentUser'] = "admin";
                         $_SESSION["fullName"] = $admin->getName($user);
                         header("Location: dashboard");
                         exit();

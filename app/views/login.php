@@ -1,54 +1,64 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="../public/resources/<?= $_SESSION['logo']?>">
     <link rel="stylesheet" href="../css/<?=$_SESSION['theme']?>_theme.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 </head>
 <body class="container bg-light" style=" font-family: Poppins; background-image: url('../public/resources/login_bg.png');  background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
     <div class="container-fluid my-5">
         <div class="container d-flex justify-content-center align-items-center">
-            <img src="../public/resources/<?= $_SESSION['logo']?>" style="height: 150px;" alt="">
+            <img src="../public/resources/<?= $_SESSION['logo']?>" style="height: 9.375rem;" alt="">
             <h1 class="text-primary"><?= $_SESSION['schoolname']?></h1>
         </div>
     </div>
     <!-- Display error message if any -->
-    <?php var_dump($_SESSION["setting"]);?>
+    <?php //var_dump($_SESSION["setting"]);?>
     <?php if (isset($_SESSION["errors"])) : ?>
         <?php $this->showAlert($_SESSION["errors"], 'danger'); ?>
         <?php unset($_SESSION["errors"]); // Clear the error message from session 
         ?>
     <?php endif; ?>
     <div class="container-fluid d-flex justify-content-center mb-5">
-        <div class="row d-flex justify-content-center border border-primary" style="width: 70%; height: 450px;">
+        <div class="row d-flex justify-content-center border border-primary" style="width: 80%; height: 25rem;">
             <div class="col-lg-6 col-sm-12 bg-primary d-flex align-items-center">
                 <div class="d-flex">
-                    <i class="bi bi-bookmark-check h1 text-white"></i>
+                    
                     <div class="row">
-                        <p class="text-white fs-4 fw-bold mt-2">Faculty Evaluation System</p>
-                        <p class="text-white"><?=$_SESSION['semester']?> Semester A.Y. <?=$_SESSION['acadyear']?></p>
+                        <p class="text-white fs-5 fw-bold"><i class="fa fa-check-circle fa-1xl text-white"></i> Faculty Evaluation System</p>
+                        <p class="text-white" style="margin-top: -1rem; margin-left: 1.5rem;"><?=$_SESSION['semester']?> Semester A.Y. <?=$_SESSION['acadyear']?></p>
                     </div>
                 </div>
             </div>
             <div class="container col-lg-6 col-sm-12 bg-white">
                 <div class="row">
-                    <p class="mt-lg-5 mt-md-2 mb-lg-5 mb-sm-3 fs-5 w-100 text-center">Login</p>
-                    <form class="" method="post" action=" ">
-                        <div class="form-floating d-flex alight-content-center">
-                            <i class="bi bi-person h1 text-primary" style="width:13%;"></i>
-                            <input type="text" name="login_id" id="id" class="form-control mb-2" placeholder="e.g. MA1234567" />
-                            <label class="form-label mx-5 mx-md-5" for="id">ID</label>
-                        </div>
-                        <div class="form-floating d-flex alight-content-center">
-                            <i class="bi bi-lock h1 text-primary" style="width:13%;"></i>
-                            <input type="password" name="login_pass" id="pass" class="form-control" placeholder="Password" />
-                            <label class="form-label mx-5" for="pass">Password</label>
-                        </div>
-                        <button name="login_submit" class="col-12 btn btn-primary mt-4" type="submit">Login</button>
-                    </form>
+                    <p class="mt-lg-5 pt-5 mt-md-1 mb-lg-5 mb-sm-3 fs-5 w-100 text-center">Hello there, human!</p>
+                    <form class="" method="post" action="">
+    <div class="row justify-content-center mt-lg-3 mt-md-2">
+        <div class="col-lg-11">
+            <div class="form-group d-flex align-items-center mb-3">
+                <i class="fa fa-user fa-2x text-primary"></i>
+                <input type="text" name="login_id" id="id" autocomplete="off" class="form-control" placeholder="Username" style="margin-left: .5rem;"/>
+                
+            </div>
+            <div class="form-group d-flex align-items-center">
+                <i class="fa fa-lock fa-2x text-primary"></i>
+                <input type="password" name="login_pass" id="pass" class="form-control" placeholder="Password" style="margin-left: .5rem;"/>
+                
+            </div>
+            <button name="login_submit" class="btn btn-primary col-12 mt-3" type="submit">Login</button>
+        </div>
+    </div>
+</form>
+
+
                 </div>
             </div>
         </div>

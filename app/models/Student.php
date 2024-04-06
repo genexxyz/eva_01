@@ -15,4 +15,14 @@ class Student extends Model
         
         return $result && count($result) > 0; // Return true if any rows are found, indicating successful authentication
     }
+    public function getName($user){
+        $result = $this->where(['stud_code' => $user]);
+        if ($result && count($result) > 0) {
+            // Assuming the result is an array of objects with 'stud_fname' and 'stud_lname' properties
+            $getName = $result[0];
+            $fullName = $getName->stud_fname . ' ' . $getName->stud_lname;
+            return $fullName;
+        }
+        
+    }
 }

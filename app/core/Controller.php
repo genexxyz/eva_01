@@ -25,28 +25,29 @@ class Controller
         $alertMessage = '';
         switch ($type) {
             case 'success':
-                $iconClass = 'bi bi-check-circle-fill';
+                $iconClass = 'fa fa-check-circle';
                 break;
             case 'warning':
-                $iconClass = 'bi bi-exclamation-triangle-fill';
+                $iconClass = 'fa fa-exclamation-triangle';
                 break;
             case 'danger':
-                $iconClass = 'bi bi-x-circle-fill';
+                $iconClass = 'fa fa-times-circle';
                 break;
             default:
-                $iconClass = 'bi bi-info-circle-fill';
+                $iconClass = 'fa fa-info-circle';
                 break;
         }
 
         // Display the alert message
-
-        echo '<div class="alert alert-' . $type . ' alert-dismissible fade show" role="alert">';
-        echo '<i class="' . $iconClass . ' h4 mx-2"></i> ';
-        echo $message;
-        echo '<button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">';
-        echo '<span aria-hidden="true"></span>';
-        echo '</button>';
-        echo '</div>';
+        echo '
+<div class="container">
+    <div class="alert alert-' . $type . ' alert-dismissible fade show mx-auto" role="alert" style="max-width: 30rem;">
+        <i class="' . $iconClass . ' h4"></i> 
+        ' . $message . '
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>';
+        
     }
 
 

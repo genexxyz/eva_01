@@ -1,12 +1,11 @@
 <?php
+session_start();
 // Check if the user is not logged in (no active session)
-if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
+if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
     // Redirect the user to the login page
     header("Location: login");
     exit(); // Stop further execution of the script
 }
-
-
 // If the user is logged in, continue to the restricted page
 ?>
 
@@ -24,71 +23,11 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <style>
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 15rem;
-            /* Initial sidebar width */
-            min-width: 3.75rem;
-            /* Minimum width of the sidebar */
-            transition: width 0.3s;
-            z-index: 1000;
-            /* Ensure sidebar is above content */
-        }
-
-        .sidebar.collapsed {
-            width: 3.75rem;
-            /* Width of the collapsed sidebar */
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 6.25rem 0;
-            /* Add padding to the top of the sidebar buttons */
-            margin: 0;
-        }
-
-        .sidebar ul li {
-            padding: 0.625rem;
-            text-align: center;
-            margin-bottom: 0.625rem;
-        }
-
-        .sidebar ul li a {
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            height: 3rem;
-            padding-right: 0;
-        }
-
-        .sidebar ul li a i {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            margin-left: 1rem;
-        }
-
-        .sidebar ul li a:hover {
-            background-color: #007bff;
-            /* New background color on hover */
-        }
-
-        /* Active (selected) state */
-        .sidebar ul li a.active {
-            background-color: #0056b3;
-            /* New background color when button is active */
-        }
-
         /* Content */
         .content {
             transition: margin-left 0.3s;
             padding: 1rem;
-            margin-left: 15rem;
+            margin-left: 5rem;
             /* Adjust margin to accommodate sidebar width */
             padding-top: 6.25rem;
             padding-left: 1rem;
@@ -97,10 +36,6 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
             /* Width of the sidebar */
         }
 
-        .content.collapsed {
-            margin-left: 3.75rem;
-            /* Width of the collapsed sidebar */
-        }
 
         /* Navbar */
         .navbar {
@@ -148,19 +83,6 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
             /* Adjust font size for the tagline */
         }
 
-        .navbar-toggler {
-            color: #fff;
-            border: none;
-            outline: none;
-            position: absolute;
-            /* Position the button absolutely */
-            left: 1rem;
-            /* Adjust the left positioning */
-            top: 50%;
-            /* Align the button vertically */
-            transform: translateY(-50%);
-            /* Center the button vertically */
-        }
 
         .dropdown-menu {
             display: block;
@@ -168,6 +90,7 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
             visibility: hidden;
             transform: translateY(0%);
             transition: all .5s;
+            cursor: pointer;
         }
 
         .dropdown:hover .dropdown-menu {
@@ -180,20 +103,11 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
 
 
         @media (max-width: 992px) {
-            .sidebar ul li a span {
-                display: none;
-                /* Hide full name in mobile view */
-            }
+
 
             .navbar-toggler {
                 display: none;
                 /* Hide button in mobile view */
-            }
-
-            .sidebar ul li a i {
-                font-size: 1.5rem;
-                margin-left: 0.313rem;
-
             }
 
             .brand-name {
@@ -208,17 +122,7 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
             }
         }
 
-        @media (min-width: 992px) {
-            .sidebar.collapsed ul li a span {
-                display: none;
-                /* Hide labels when uncollapsed */
-            }
-
-            .sidebar ul li a i {
-                font-size: 1.5rem;
-                margin-left: 0.313rem;
-            }
-        }
+        @media (min-width: 992px) {}
     </style>
 </head>
 
@@ -227,13 +131,9 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <!-- Button on the left side -->
-            <button class="navbar-toggler d-none d-lg-block" type="button" id="sidebarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <!-- Brand with logo, name, and tagline -->
             <a class="navbar-brand" href="#">
-                <img src="../public\resources\<?= $_SESSION['logo'] ?>" alt="Logo" class="brand-logo">
+                <img src="../public/resources/<?= $_SESSION['logo'] ?>" alt="Logo" class="brand-logo">
                 <div class="brand-info">
                     <div class="brand-name">Faculty Evaluation System</div>
                     <div class="tagline"><?= $_SESSION['schoolname'] ?></div>
@@ -245,33 +145,38 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'admin') {
                     <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
                 </button>
                 <div class="dropdown-menu dropdown-menu-end" style="right: 0; left: auto;" aria-labelledby="dropdownMenuButton" id="dropdownEffect">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#"><?= $_SESSION["fullName"]; ?></a>
+                    <a class="dropdown-item" href="#">Change Password</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
                 </div>
             </div>
         </div>
         </div>
     </nav>
 
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Logout Confirmation</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
 
-    <!-- Sidebar -->
-    <div class="sidebar bg-primary" id="sidebar">
-        <ul>
-            <li><a href="<?= ROOT ?>/dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
-            <li><a href="<?= ROOT ?>/students"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-            <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
-            <li><a href="<?= ROOT ?>/logout"><i class="fa fa-sign-out-alt"></i> <span>Logout</span></a></li>
-        </ul>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to logout?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="<?= ROOT ?>/logout" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
 
     <div class="content" id="content">
         <div class="container-fluid">
-
-            <?php
-            if (!isset($_SESSION['alert_shown'])) {
-                $this->showAlert('Welcome, ' . $_SESSION["fullName"] . "(Admin)!", 'success');
-                $_SESSION['alert_shown'] = true;
-            }
-            ?>
