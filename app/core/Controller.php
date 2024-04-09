@@ -18,47 +18,28 @@ class Controller
         }
     }
 
-    // Function to display an alert message
-    public function showAlert($message, $type = 'info')
+    protected function checkSessionTimeout()
     {
-        // Set the alert type (info, success, warning, danger)
-        $alertMessage = '';
-        switch ($type) {
-            case 'success':
-                $iconClass = 'fa fa-check-circle';
-                break;
-            case 'warning':
-                $iconClass = 'fa fa-exclamation-triangle';
-                break;
-            case 'danger':
-                $iconClass = 'fa fa-times-circle';
-                break;
-            default:
-                $iconClass = 'fa fa-info-circle';
-                break;
+        // Set session timeout to 30 minutes (1800 seconds)
+        $session_timeout = 5; // 30 minutes in seconds
+
+        // Set session cookie parameters
+        session_set_cookie_params($session_timeout);
+
+        // Track user activity and update last activity timestamp
+        if (!isset($_SESSION['last_activity'])) {
+            $_SESSION['last_activity'] = time();
+        } else {
+            $_SESSION['last_activity'] = time(); // Update last activity timestamp
         }
 
-        // Display the alert message
-        echo '
-<div class="container">
-    <div class="alert alert-' . $type . ' alert-dismissible fade show mx-auto" role="alert" style="max-width: 30rem;">
-        <i class="' . $iconClass . ' h4"></i> 
-        ' . $message . '
-        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-    </div>
-</div>';
-        
-    }
-
-
-    public function getErrorMessageIfEmpty($inputs, $fieldNames)
-    {
-        foreach ($inputs as $key => $input) {
-            if (empty($input)) {
-                $fieldName = isset($fieldNames[$key]) ? ucfirst($fieldNames[$key]) : 'Field';
-                return $fieldName . ' cannot be empty.';
-            }
+        // Check if the session has expired due to inactivity
+        if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $session_timeout)) {
+            // Expire session and log out user
+            session_unset();    // Unset all session variables
+            session_destroy();  // Destroy the session
+            redirect("login"); // Redirect to login page with timeout message
+            exit();
         }
-        return ''; // No error message
     }
 }

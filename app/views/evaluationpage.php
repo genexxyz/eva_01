@@ -1,6 +1,5 @@
-<?php include "partials/studpage_h.php"; ?>
+<?php include "partials/studentpage_header.php"; ?>
 
-<?php $this->showAlert('Welcome, ' . $_SESSION["fullName"] . "!", 'success');?>
+<h1>Content Area</h1>
 
-
-<?php include "partials/studpage_f.php"; ?>
+<?php include "partials/studentpage_footer.php"; ?>

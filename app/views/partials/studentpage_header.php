@@ -1,9 +1,10 @@
 <?php
+$theme = $_SESSION['theme'];
 session_start();
 // Check if the user is not logged in (no active session)
 if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
     // Redirect the user to the login page
-    header("Location: login");
+    header("Location: 404");
     exit(); // Stop further execution of the script
 }
 // If the user is logged in, continue to the restricted page
@@ -16,9 +17,11 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty Evaluation System</title>
+    <title><?= $_SESSION['systemname']?></title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../css/<?= $_SESSION['theme'] ?>_theme.min.css">
+    <base href="<?= "http://localhost/eva_01/" ;?>">
+    <link rel="icon" type="image/x-icon" href="public/resources/<?= $_SESSION['logo']?>">
+    <link rel="stylesheet" href="css/main_theme.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
@@ -99,6 +102,11 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
             transform: translateY(20%);
         }
 
+        .dropdown .dropdown-menu .dropdown-item:hover{
+            color: white;
+            background-color: #343a40;
+        }
+
 
 
 
@@ -133,9 +141,9 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
         <div class="container">
             <!-- Brand with logo, name, and tagline -->
             <a class="navbar-brand" href="#">
-                <img src="../public/resources/<?= $_SESSION['logo'] ?>" alt="Logo" class="brand-logo">
+                <img src="public/resources/<?= $_SESSION['logo'] ?>" alt="Logo" class="brand-logo">
                 <div class="brand-info">
-                    <div class="brand-name">Faculty Evaluation System</div>
+                    <div class="brand-name"><?= $_SESSION['systemname']?></div>
                     <div class="tagline"><?= $_SESSION['schoolname'] ?></div>
                 </div>
             </a>
@@ -145,10 +153,10 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
                     <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
                 </button>
                 <div class="dropdown-menu dropdown-menu-end" style="right: 0; left: auto;" aria-labelledby="dropdownMenuButton" id="dropdownEffect">
-                    <a class="dropdown-item" href="#"><?= $_SESSION["fullName"]; ?></a>
-                    <a class="dropdown-item" href="#">Change Password</a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> <strong><?= $_SESSION["fullName"]; ?></strong></a>
+                    <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Change Password</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
         </div>
@@ -169,7 +177,7 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <a href="<?= ROOT ?>/logout" class="btn btn-danger">Logout</a>
+                    <a href="<?= ROOT ?>/login/logout" class="btn btn-danger">Logout</a>
                 </div>
             </div>
         </div>
@@ -180,3 +188,8 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
 
     <div class="content" id="content">
         <div class="container-fluid">
+
+        <?php if (!isset($_SESSION['showOnce'])) {
+                echo $_SESSION['welcome'];
+                $_SESSION['showOnce'] = true;
+            }?>

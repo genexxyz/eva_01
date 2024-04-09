@@ -1,0 +1,21 @@
+//custom variables
+
+//import the functions and variables
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+
+$custom-theme-colors: (
+    "evamaroon": maroon,
+    "evaorange": #fa8128,
+    "evayellow": #fff44f,
+    "evagreen": green,
+    "evapurple": purple,
+    "evablue": blue,
+    "evagrey": #616e7e,
+    "evablack": black
+);
+
+$theme-colors: map-merge($custom-theme-colors , $theme-colors);
+
+//import bootstrap
+@import '../node_modules/bootstrap/scss/bootstrap';

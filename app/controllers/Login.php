@@ -4,14 +4,9 @@ class Login extends Controller
 {
     public function index()
     {
-        $set = new Setting();
-        $_SESSION['theme'] = $set->getSetting('set_theme');
-        $_SESSION['logo'] = $set->getSetting('set_logo');
-        $_SESSION['schoolname'] = $set->getSetting('set_schoolname');
-        $_SESSION['semester'] = $set->getSetting('set_sem');
-        $_SESSION['acadyear'] = $set->getSetting('set_acadyear');
+        settingUpdate();
         $this->view('login');
-        
+
         if (isset($_POST['login_submit'])) {
             $user = $_POST['login_id'];
             $pass = $_POST['login_pass'];
@@ -19,10 +14,11 @@ class Login extends Controller
             // Validate form data
             if (empty($user) || empty($pass)) {
                 // Set error message
-                $_SESSION["errors"] = 'Username and Password cannot be empty.';
-                
+
+                $_SESSION["errors"] = showAlert('Username and Password cannot be empty.', 'danger');
+
                 // Redirect back to the form
-                header("Location: login");
+                redirect("login");
                 exit();
             } else {
                 // No errors, proceed with authentication
@@ -33,7 +29,8 @@ class Login extends Controller
                     $_SESSION["userId"] = $user;
                     $_SESSION['currentUser'] = "student";
                     $_SESSION["fullName"] = $student->getName($user);
-                    header("Location: evaluationpage");
+                    $_SESSION['welcome'] = showAlert('Welcome, ' . $_SESSION["fullName"] . "!", 'success');
+                    redirect("evaluationpage");
                     exit();
                 } else {
                     $admin = new Admin();
@@ -43,16 +40,37 @@ class Login extends Controller
                         $_SESSION["userId"] = $user;
                         $_SESSION['currentUser'] = "admin";
                         $_SESSION["fullName"] = $admin->getName($user);
-                        header("Location: dashboard");
+                        $_SESSION['welcome'] = showAlert('Welcome, ' . $_SESSION["fullName"] . "(Admin)!", 'success');
+                        redirect("adminpage");
                         exit();
                     } else {
-                        $_SESSION["errors"] = 'Invalid username or password.';
-                        header("Location: login");
-                        exit();
+                        $faculty = new Faculty();
+                        $facultyResult = $faculty->authenticate($user, $pass);
+
+                        if ($facultyResult) {
+                            $_SESSION["userId"] = $user;
+                            $_SESSION['currentUser'] = "faculty";
+                            $_SESSION["fullName"] = $faculty->getName($user);
+                            $_SESSION['welcome'] = showAlert('Welcome, ' . $_SESSION["fullName"] . "!", 'success');
+                            redirect("facultypage");
+                            exit();
+                        } else {
+                            $_SESSION["errors"] = showAlert('Invalid username or password.', 'danger');
+                            header("Location: login");
+                            exit();
+                        }
                     }
                 }
             }
         }
     }
+
+    public function logout()
+    {
+        session_start();
+        $_SESSION = array();
+        session_destroy();
+        redirect("login");
+        exit();
+    }
 }
-?>

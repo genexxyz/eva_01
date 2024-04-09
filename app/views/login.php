@@ -1,4 +1,4 @@
-
+<?php $theme = $_SESSION['theme'];?>
 
 
 <!DOCTYPE html>
@@ -6,9 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login | <?= " " . $_SESSION['systemname']?></title>
     <link rel="icon" type="image/x-icon" href="../public/resources/<?= $_SESSION['logo']?>">
-    <link rel="stylesheet" href="../css/<?=$_SESSION['theme']?>_theme.min.css">
+    <link rel="stylesheet" href="../css/main_theme.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 </head>
@@ -16,23 +16,22 @@
     <div class="container-fluid my-5">
         <div class="container d-flex justify-content-center align-items-center">
             <img src="../public/resources/<?= $_SESSION['logo']?>" style="height: 9.375rem;" alt="">
-            <h1 class="text-primary"><?= $_SESSION['schoolname']?></h1>
+            <h1 class="text-<?= $theme?>"><?= $_SESSION['schoolname']?></h1>
         </div>
     </div>
     <!-- Display error message if any -->
-    <?php //var_dump($_SESSION["setting"]);?>
     <?php if (isset($_SESSION["errors"])) : ?>
-        <?php $this->showAlert($_SESSION["errors"], 'danger'); ?>
+        <?php echo( $_SESSION["errors"]) ?>
         <?php unset($_SESSION["errors"]); // Clear the error message from session 
         ?>
     <?php endif; ?>
     <div class="container-fluid d-flex justify-content-center mb-5">
-        <div class="row d-flex justify-content-center border border-primary" style="width: 80%; height: 25rem;">
-            <div class="col-lg-6 col-sm-12 bg-primary d-flex align-items-center">
+        <div class="row d-flex justify-content-center border border-<?= $theme?>" style="width: 80%; height: 25rem;">
+            <div class="col-lg-6 col-sm-12 bg-<?= $theme?> d-flex align-items-center">
                 <div class="d-flex">
                     
                     <div class="row">
-                        <p class="text-white fs-5 fw-bold"><i class="fa fa-check-circle fa-1xl text-white"></i> Faculty Evaluation System</p>
+                        <p class="text-white fs-5 fw-bold"><i class="fa fa-check-circle fa-1xl text-white"></i><?= " " . $_SESSION['systemname']?></p>
                         <p class="text-white" style="margin-top: -1rem; margin-left: 1.5rem;"><?=$_SESSION['semester']?> Semester A.Y. <?=$_SESSION['acadyear']?></p>
                     </div>
                 </div>
@@ -44,16 +43,16 @@
     <div class="row justify-content-center mt-lg-3 mt-md-2">
         <div class="col-lg-11">
             <div class="form-group d-flex align-items-center mb-3">
-                <i class="fa fa-user fa-2x text-primary"></i>
+                <i class="fa fa-user fa-2x text-<?= $theme?>"></i>
                 <input type="text" name="login_id" id="id" autocomplete="off" class="form-control" placeholder="Username" style="margin-left: .5rem;"/>
                 
             </div>
             <div class="form-group d-flex align-items-center">
-                <i class="fa fa-lock fa-2x text-primary"></i>
+                <i class="fa fa-lock fa-2x text-<?= $theme?>"></i>
                 <input type="password" name="login_pass" id="pass" class="form-control" placeholder="Password" style="margin-left: .5rem;"/>
                 
             </div>
-            <button name="login_submit" class="btn btn-primary col-12 mt-3" type="submit">Login</button>
+            <button name="login_submit" class="btn btn-<?= $theme?> col-12 mt-3" type="submit">Login</button>
         </div>
     </div>
 </form>

@@ -1,1 +1,21 @@
 <?php $this->showAlert('Welcome, ' . $_SESSION["fullName"] . "(Admin)!", 'success');?>
+
+
+
+<?php if (isset($_SESSION["welcome"])) : ?>
+        <?php echo( $_SESSION["welcome"]) ?>
+        <?php $_SESSION["welcome"] = true; // Clear the error message from session 
+        ?>
+    <?php endif; ?>
+
+
+    <?php if(isset($_SESSION["welcome"])){
+    if($_SESSION["welcome"] = true){
+        echo '';
+    }
+    else{
+        echo $_SESSION["welcome"];
+        $_SESSION["welcome"] = true;
+    }
+    
+}
