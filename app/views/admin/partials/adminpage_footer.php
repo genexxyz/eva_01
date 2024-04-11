@@ -14,12 +14,12 @@
             </div>
             <div class="modal-body">
                 <!-- Form inside the modal -->
-                <form id="settingsForm" method="post" action="">
+                <form id="settingsForm" method="post" action="" enctype="multipart/form-data">
                     <div class="form-group m-2">
                         <img src="public/resources/<?= $_SESSION['logo'] ?>" alt="Logo" class="brand-logo border border-1 border-black w-25">
                         <div class="brand-info">
                             <label class="custom-file-label" for="customFile">Choose file</label>
-                            <input type="file" class="custom-file-input" id="customFile" name="photo" accept="image/*" value="<?= $_SESSION['logo'] ?>">
+                            <input type="file" class="custom-file-input" id="customFile" name="photo" accept="image/*">
                         </div>
                     </div>
                     <div class="form-group mb-2">
@@ -44,16 +44,26 @@
                     <div class="form-group">
                         <label for="themeColor">Theme:</label>
                         <select class="form-control" id="themeColor" name="themeColor">
-                            <option value="evamaroon">Maroon</option>
-                            <option value="evaorange">Orange</option>
-                            <option value="evayellow">Yellow</option>
-                            <option value="evagreen">Green</option>
-                            <option value="evapurple">Purple</option>
-                            <option value="evablue">Blue</option>
-                            <option value="evagrey">Grey</option>
-                            <option value="evablack">Black</option>
+                            <?php
+                            $themes = array(
+                                'evamaroon' => 'Maroon',
+                                'evaorange' => 'Orange',
+                                'evayellow' => 'Yellow',
+                                'evagreen' => 'Green',
+                                'evapurple' => 'Purple',
+                                'evablue' => 'Blue',
+                                'evagrey' => 'Grey',
+                                'evablack' => 'Black'
+                            );
+
+                            foreach ($themes as $themeKey => $themeName) {
+                                $selected = ($_SESSION['theme'] == $themeKey) ? 'selected' : '';
+                                echo '<option value="' . $themeKey . '" ' . $selected . '>' . $themeName . '</option>';
+                            }
+                            ?>
                         </select>
                     </div>
+
 
             </div>
             <div class="modal-footer">
