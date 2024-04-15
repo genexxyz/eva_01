@@ -20,12 +20,16 @@ $currentPage = $_SESSION['currentPage'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | <?= " " . $_SESSION['systemname'] ?></title>
     <!-- Bootstrap CSS -->
-    <base href="<?= "http://localhost/eva_01/"; ?>">
+    <base href="<?= BASEURL ?>">
     <link rel="icon" type="image/x-icon" href="public/resources/<?= $_SESSION['logo'] ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/main_theme.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css">
+
     <style>
         /* Sidebar */
         .sidebar {
@@ -166,39 +170,7 @@ $currentPage = $_SESSION['currentPage'];
             /* Center the button vertically */
         }
 
-        .dropdown-menu {
-            display: block;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(0%);
-            transition: all .5s;
-            cursor: pointer;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(20%);
-
-        }
-
-        .dropdown .dropdown-menu .dropdown-item:hover {
-            color: white;
-            background-color: #343a40;
-        }
-
-        .treeview-menu {
-            display: none;
-            /* Hide nested menu items by default */
-            list-style: none;
-            padding-left: 20px;
-            /* Indent nested menu items */
-        }
-
-        /* Show nested menu items when parent item is active */
-        .sidebar .treeview.active .treeview-menu {
-            display: block;
-        }
+        
 
 
 
@@ -268,7 +240,7 @@ $currentPage = $_SESSION['currentPage'];
                 <button class="btn btn-secondary rounded-circle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 40px; height: 40px;">
                     <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
                 </button>
-                <div class="dropdown-menu dropdown-menu-end" style="right: 0; left: auto;" aria-labelledby="dropdownMenuButton" id="dropdownEffect">
+                <div class="dropdown-menu dropdown-menu-end" style="right: 0; left: auto;" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#"><i class="fa fa-user"></i> <strong><?= $_SESSION["fullName"]; ?></strong></a>
                     <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Change Password</a>
                     <div class="dropdown-divider"></div>
@@ -314,7 +286,8 @@ $currentPage = $_SESSION['currentPage'];
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-book"></i><span>Classes</span></a></li>
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-note-sticky"></i><span>Subjects</span></a></li>
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-chalkboard-user"></i><span>Faculties</span></a></li>
-            <li><a href="<?= ROOT ?>/adminpage/settings" <?php if ($currentPage == 'settings') echo 'class="active"' ?>><i class="fa fa-user-friends"></i><span>Students</span></a></li>
+            <li><a href="<?= ROOT ?>/adminpage/studentlist" <?php if ($currentPage == 'studentList') echo 'class="active"' ?>><i class="fa fa-user-friends"></i><span>Students</span></a></li>
+            <li><a href="<?= ROOT ?>/adminpage/settings" class=""><i class="fa-solid fa-square-poll-vertical"></i><span><strong>RESULTS</strong></span></a></li>
         </ul>
     </div>
 

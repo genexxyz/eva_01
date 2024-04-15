@@ -19,3 +19,40 @@
     }
     
 }
+
+
+
+
+.dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0%);
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(20%);
+
+}
+
+.dropdown .dropdown-menu .dropdown-item:hover {
+    color: white;
+    background-color: #343a40;
+}
+
+.treeview-menu {
+    display: none;
+    /* Hide nested menu items by default */
+    list-style: none;
+    padding-left: 20px;
+    /* Indent nested menu items */
+}
+
+/* Show nested menu items when parent item is active */
+.sidebar .treeview.active .treeview-menu {
+    display: block;
+}

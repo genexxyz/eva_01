@@ -52,8 +52,8 @@
                                 'evagreen' => 'Green',
                                 'evapurple' => 'Purple',
                                 'evablue' => 'Blue',
-                                'evagrey' => 'Grey',
-                                'evablack' => 'Black'
+                                'evagrey' => 'Grey'
+                                
                             );
 
                             foreach ($themes as $themeKey => $themeName) {
@@ -87,7 +87,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
+
 <script>
+
+
     $(document).ready(function() {
         // Function to check window width and toggle sidebar collapse class
         function toggleSidebarCollapse() {
@@ -117,6 +121,13 @@
         setTimeout(function() {
             $(".alert").alert('close');
         }, 5000);
+        
+        
+
+    var select_box_element = document.querySelector('#sectionSelect');
+        dselect(select_box_element,
+    {search: true});
+
 
     });
 </script>

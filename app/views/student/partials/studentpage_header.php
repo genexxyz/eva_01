@@ -1,5 +1,5 @@
 <?php
-$theme = $_SESSION['theme'];
+
 session_start();
 // Check if the user is not logged in (no active session)
 if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
@@ -7,6 +7,7 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
     header("Location: 404");
     exit(); // Stop further execution of the script
 }
+$theme = $_SESSION['theme'];
 // If the user is logged in, continue to the restricted page
 ?>
 
@@ -19,7 +20,7 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $_SESSION['systemname']?></title>
     <!-- Bootstrap CSS -->
-    <base href="<?= "http://localhost/eva_01/" ;?>">
+    <base href="<?= BASEURL ?>">
     <link rel="icon" type="image/x-icon" href="public/resources/<?= $_SESSION['logo']?>">
     <link rel="stylesheet" href="css/main_theme.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -129,7 +130,9 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
                 display: none;
             }
         }
-
+        .custom-shadow {
+    box-shadow: 0 0.4rem 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
         @media (min-width: 992px) {}
     </style>
 </head>
@@ -137,11 +140,12 @@ if (!isset($_SESSION['userId']) || $_SESSION['currentUser'] !== 'student') {
 <body style=" font-family: Poppins;">
 
     <!-- Top Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-evagreen">
         <div class="container">
             <!-- Brand with logo, name, and tagline -->
             <a class="navbar-brand" href="#">
-                <img src="public/resources/<?= $_SESSION['logo'] ?>" alt="Logo" class="brand-logo">
+                
+                <img src="public/resources/<?= $_SESSION['logo'] ?>" alt="Logo" class="brand-logo img-fluid custom-shadow rounded-5">
                 <div class="brand-info">
                     <div class="brand-name"><?= $_SESSION['systemname']?></div>
                     <div class="tagline"><?= $_SESSION['schoolname'] ?></div>

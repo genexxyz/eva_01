@@ -110,4 +110,26 @@ class Model extends Database
 
         return false;
     }
+
+
+    public function classList()
+    {
+
+        $query = "SELECT class_id,concat(class_course,' - ',class_level,class_section) as `class` FROM sections";
+        //$query = "select * from $this->table";
+        $result = $this->query($query);
+
+        $classList = [];
+
+    if ($result) {
+        // Convert the result into an associative array
+        foreach ($result as $row) {
+            $classList[$row->class_id] = $row->class;
+        }
+    }
+
+    return $classList;
+    }
+
+
 }
