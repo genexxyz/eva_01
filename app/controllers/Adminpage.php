@@ -55,21 +55,15 @@ class Adminpage extends Controller
     {
         $setting = new Setting();
 
-        if (isset($_POST['btn_settings'])) {
-            $arr['set_systemname'] = $_POST['systemname'];
-            $arr['set_theme'] = $_POST['themeColor'];
-            //$arr['set_logo'] = $_POST['photo'];
-            $arr['set_schoolname'] = $_POST['schoolname'];
-            $arr['set_sem'] = $_POST['semester'];
-            $arr['set_acadyear'] = $_POST['acadyear'];
-
+        if (count($_POST) > 0) {
+            $_POST[('set_id')] = "1";
 
             // Check if file is uploaded
             if (!empty($_FILES['photo']['tmp_name'])) {
                 $uploadDir = ROOT . "/" . 'resources/';
                 $uploadFile = $uploadDir . 'logo.' . pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
                 $logoName = 'logo.' . pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-                $existingLogoFile = $uploadDir . $_SESSION['logo'];
+                $existingLogoFile = $uploadDir . $_POST['set_logo'];
 
                 // Delete existing logo file if it exists
                 if (file_exists($existingLogoFile)) {
@@ -79,7 +73,7 @@ class Adminpage extends Controller
                 // Move uploaded file to destination folder
                 if (move_uploaded_file($_FILES['photo']['tmp_name'], '../public/resources/' . 'logo.' . pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION))) {
                     // Update logo in database
-                    $arr['set_logo'] = $logoName;
+                    $_POST['set_logo'] = $logoName;
 
 
                     // Update session with new logo path
@@ -89,7 +83,7 @@ class Adminpage extends Controller
                 }
             }
 
-            $setting->update1('1', $arr);
+            $setting->update('1', $_POST, "set_id");
             //$setting->update1('1', $arr);
             settingUpdate();
             //redirect('/user');
@@ -97,32 +91,21 @@ class Adminpage extends Controller
     }
 
 
-    public function addStudent(){
+    public function addStudent()
+    {
         $addStudent = new Student();
 
-        if(isset($_POST['addStudent'])){
-            
-                $arr['stud_code'] = $_POST['id'];
-                $arr['stud_fname'] = $_POST['firstname'];
-                $arr['stud_mname'] = $_POST['middlename'];
-                $arr['stud_lname'] = $_POST['lastname'];
-                $arr['stud_class'] = $_POST['section'];
-                $arr['stud_email'] = $_POST['email'];
-                $arr['stud_pass'] = '@Student01';
-                
-                $checkId = $addStudent->where(['stud_code' => $_POST['id']]);
-if($checkId){
-echo 'error';
-}else{
-    $addStudent->insert($arr);
-}
-                
+        if (count($_POST) > 0) {
 
+            $_POST['stud_pass'] = '@Student01';
 
+            $checkId = $addStudent->where(['stud_code' => $_POST['stud_code']]);
+            if ($checkId) {
+                echo 'error';
+            } else {
+                $addStudent->insert($_POST);
+            }
 
-                
-                //redirect('/user');
-            
         }
     }
 }

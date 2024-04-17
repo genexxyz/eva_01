@@ -61,11 +61,10 @@ class Model extends Database
         return false;
     }
 
-    public function update($id, $data, $column = 'id')
+    public function update($id, $data, $column)
     {
-        
         $keys = array_keys($data);
-        $query = "update $this->table set";
+        $query = "update $this->table set ";
 
         foreach ($keys as $key) {
             $query .= $key . " = :" . $key . ", ";
@@ -86,20 +85,20 @@ class Model extends Database
     {
         // Get column names from $data array
         $keys = array_keys($data);
-    
+
         // Build SET clause for the update query
         $setClause = implode(' = ?, ', $keys) . ' = ?';
-    
+
         // Prepare the SQL statement
         $query = "UPDATE $this->table SET $setClause WHERE $column = ?";
-    
+
         // Execute the query with data values
         $result = $this->query($query, array_merge(array_values($data), [$id]));
-    
+
         // Check if update was successful
         return $result !== false;
     }
-    
+
 
     public function delete($id, $column = 'id')
     {
@@ -121,15 +120,13 @@ class Model extends Database
 
         $classList = [];
 
-    if ($result) {
-        // Convert the result into an associative array
-        foreach ($result as $row) {
-            $classList[$row->class_id] = $row->class;
+        if ($result) {
+            // Convert the result into an associative array
+            foreach ($result as $row) {
+                $classList[$row->class_id] = $row->class;
+            }
         }
+
+        return $classList;
     }
-
-    return $classList;
-    }
-
-
 }

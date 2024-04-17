@@ -41,7 +41,7 @@ class Login extends Controller
                         $_SESSION['currentUser'] = "admin";
                         $_SESSION["fullName"] = $admin->getName($user);
                         $_SESSION['welcome'] = showAlert('Welcome, ' . $_SESSION["fullName"] . "(Admin)!", 'success');
-                        redirect("adminpage");
+                        redirect("adminpage/index");
                         exit();
                     } else {
                         $faculty = new Faculty();

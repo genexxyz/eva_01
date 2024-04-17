@@ -76,21 +76,21 @@
         <form action="" method="post">
           <div class="form-group">
             <label for="student_id"><strong>Student ID</strong></label>
-            <input type="text" class="form-control mb-3" id="student_id" name="id" placeholder="MA12345678" required autocomplete="off">
+            <input type="text" class="form-control mb-3" id="student_id" name="stud_code" placeholder="MA12345678" required autocomplete="off">
           </div>
 
           <div class="row d-flex justify-content-start mb-3">
           <div class="form-group col-12 mb-2">
             <label for="first_name"><strong>First Name</strong></label>
-            <input type="text" class="form-control" id="first_name" name="firstname" required autocomplete="off">
+            <input type="text" class="form-control" id="first_name" name="stud_fname" required autocomplete="off">
           </div>
           <div class="form-group col-6">
             <label for="middle_name"><strong>Middle Name</strong></label>
-            <input type="text" class="form-control" id="middle_name" name="middlename" autocomplete="off">
+            <input type="text" class="form-control" id="middle_name" name="stud_mname" autocomplete="off">
           </div>
           <div class="form-group col-6">
             <label for="last_name"><strong>Last Name</strong></label>
-            <input type="text" class="form-control" id="last_name" name="lastname" required autocomplete="off">
+            <input type="text" class="form-control" id="last_name" name="stud_lname" required autocomplete="off">
           </div>
           </div>
 
@@ -101,7 +101,7 @@
           
     <div class="form-group col-4">
         <label for="section"><strong>Course, Yr.&Sec</strong></label>
-        <select id="sectionSelect" class="form-select" required name="section">
+        <select id="sectionSelect" class="form-select" required name="stud_class">
             <option value="">Search</option>
             <?php foreach ($classOption as $option) { ?>
                 <option value="<?= $option->class_id ?>"><?= $option->class_course . "-" . $option->class_level . $option->class_section ?></option>
@@ -112,14 +112,14 @@
 
           <div class="form-group col-8">
             <label for="email"><strong>Email</strong></label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="sample@email.com" required autocomplete="off">
+            <input type="email" class="form-control" id="email" name="stud_email" placeholder="sample@email.com" required autocomplete="off">
           </div>
           </div>
           <div class="form-group mb-4">
             <label for="password"><strong>Password</strong> <i class="">(default)</i></label>
-            <input type="text" class="form-control" name="pass" disabled placeholder="@Student01">
+            <input type="text" class="form-control" name="stud_pass" disabled placeholder="@Student01">
           </div>
-          <button type="submit" name="addStudent" class="btn btn-primary w-100">Save</button>
+          <button type="submit" class="btn btn-primary w-100">Save</button>
         </form>
       </div>
     </div>
