@@ -170,10 +170,9 @@ $currentPage = $_SESSION['currentPage'];
             /* Center the button vertically */
         }
 
-        
-
-
-
+        label {
+            font-weight: bold;
+        }
 
         @media (max-width: 992px) {
             .sidebar ul li a span {
@@ -277,23 +276,26 @@ $currentPage = $_SESSION['currentPage'];
 
 
     <!-- Sidebar -->
-    <div class="sidebar bg-<?= $theme?>" id="sidebar">
+    <div class="sidebar bg-<?= $theme ?>" id="sidebar">
         <ul>
             <li><a href="<?= ROOT ?>/adminpage/dashboard" <?php if ($currentPage == 'dashboard') echo 'class="active"' ?>><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-clipboard-question"></i><span>Questionnaires</span></a></li>
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-list-check"></i><span>Criterias</span></a></li>
+            <hr>
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-calendar"></i><span>Academic Year</span></a></li>
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-book"></i><span>Classes</span></a></li>
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-note-sticky"></i><span>Subjects</span></a></li>
+            <hr>
             <li><a href="<?= ROOT ?>/adminpage/settings"><i class="fa fa-chalkboard-user"></i><span>Faculties</span></a></li>
             <li><a href="<?= ROOT ?>/adminpage/studentlist" <?php if ($currentPage == 'studentList') echo 'class="active"' ?>><i class="fa fa-user-friends"></i><span>Students</span></a></li>
+            <hr>
             <li><a href="<?= ROOT ?>/adminpage/settings" class=""><i class="fa-solid fa-square-poll-vertical"></i><span><strong>RESULTS</strong></span></a></li>
         </ul>
     </div>
 
 
 
-    
+
 
 
     <div class="content" id="content">

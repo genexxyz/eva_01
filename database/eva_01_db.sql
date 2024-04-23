@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 03:51 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 23, 2024 at 03:02 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admins` (
-  `admin_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `admin_code` varchar(21) NOT NULL,
   `admin_fname` varchar(30) NOT NULL,
   `admin_mname` varchar(21) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`admin_id`, `admin_code`, `admin_fname`, `admin_mname`, `admin_lname`, `admin_email`, `admin_pass`, `admin_date_added`) VALUES
+INSERT INTO `admins` (`id`, `admin_code`, `admin_fname`, `admin_mname`, `admin_lname`, `admin_email`, `admin_pass`, `admin_date_added`) VALUES
 (1, 'admin', 'Boy', 'Retardo', 'Bakal', 'genesisroxas4@gmaiil.com', '1234', '0000-00-00'),
 (2, 'admin2', 'Onni', '', 'Chan', '', '1234', '2024-04-09');
 
@@ -53,7 +53,7 @@ INSERT INTO `admins` (`admin_id`, `admin_code`, `admin_fname`, `admin_mname`, `a
 --
 
 CREATE TABLE `facultys` (
-  `faculty_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `faculty_code` varchar(21) NOT NULL,
   `faculty_fname` varchar(30) NOT NULL,
   `faculty_mname` varchar(21) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE `facultys` (
 -- Dumping data for table `facultys`
 --
 
-INSERT INTO `facultys` (`faculty_id`, `faculty_code`, `faculty_fname`, `faculty_mname`, `faculty_lname`, `faculty_email`, `faculty_pass`, `faculty_date_added`) VALUES
+INSERT INTO `facultys` (`id`, `faculty_code`, `faculty_fname`, `faculty_mname`, `faculty_lname`, `faculty_email`, `faculty_pass`, `faculty_date_added`) VALUES
 (1, 'fa123', 'Manny', 'D', 'Pacquiao', 'manny@g.com', '123', '0000-00-00');
 
 -- --------------------------------------------------------
@@ -77,7 +77,7 @@ INSERT INTO `facultys` (`faculty_id`, `faculty_code`, `faculty_fname`, `faculty_
 --
 
 CREATE TABLE `sections` (
-  `class_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `class_course` varchar(21) NOT NULL,
   `class_level` int(11) NOT NULL,
   `class_section` varchar(21) NOT NULL
@@ -87,7 +87,7 @@ CREATE TABLE `sections` (
 -- Dumping data for table `sections`
 --
 
-INSERT INTO `sections` (`class_id`, `class_course`, `class_level`, `class_section`) VALUES
+INSERT INTO `sections` (`id`, `class_course`, `class_level`, `class_section`) VALUES
 (1, 'BSIS', 3, 'A'),
 (2, 'BSOM', 1, 'A');
 
@@ -98,7 +98,7 @@ INSERT INTO `sections` (`class_id`, `class_course`, `class_level`, `class_sectio
 --
 
 CREATE TABLE `settings` (
-  `set_id` int(21) NOT NULL,
+  `id` int(21) NOT NULL,
   `set_systemname` varchar(30) NOT NULL,
   `set_theme` varchar(21) NOT NULL,
   `set_logo` varchar(40) NOT NULL,
@@ -111,8 +111,8 @@ CREATE TABLE `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`set_id`, `set_systemname`, `set_theme`, `set_logo`, `set_schoolname`, `set_sem`, `set_acadyear`) VALUES
-(1, 'EVA-01', 'evamaroon', 'logo.ico', 'Bulacan Polytechnic College', '2nd', '2023-2024');
+INSERT INTO `settings` (`id`, `set_systemname`, `set_theme`, `set_logo`, `set_schoolname`, `set_sem`, `set_acadyear`) VALUES
+(1, 'EVA-01', 'evagreen', 'logo.ico', 'Bulacan Polytechnic College', '1st', '2023-2024');
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,7 @@ INSERT INTO `settings` (`set_id`, `set_systemname`, `set_theme`, `set_logo`, `se
 --
 
 CREATE TABLE `students` (
-  `stud_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `stud_code` varchar(21) NOT NULL,
   `stud_fname` varchar(30) NOT NULL,
   `stud_mname` varchar(21) NOT NULL,
@@ -136,12 +136,13 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`stud_id`, `stud_code`, `stud_fname`, `stud_mname`, `stud_lname`, `stud_class`, `stud_email`, `stud_pass`, `stud_date_added`) VALUES
+INSERT INTO `students` (`id`, `stud_code`, `stud_fname`, `stud_mname`, `stud_lname`, `stud_class`, `stud_email`, `stud_pass`, `stud_date_added`) VALUES
 (1, 'MA21011456', 'Genesis', 'Retardo', 'Roxas', 1, 'genesisroxas4@gmail.com', 'admin123', '2024-04-09'),
 (4, '0123', 'Jane', 'D', 'Doe', 2, 'jane@g.com', '123', '2024-04-09'),
 (5, '211', 'was', 'sadsa', 'sadsa', 1, 'g@g.com', '@Student01', '0000-00-00'),
 (6, '1234', 'Lennie', 'Martin', 'Roxas', 1, 'l@g.com', '@Student01', '0000-00-00'),
-(7, 'ma23232', 'dsd', 'wdwd', 'wdwdw', 1, 'g@a.com', '@Student01', '0000-00-00');
+(7, 'ma23232', 'dsd', 'wdwd', 'wdwdw', 1, 'g@a.com', '@Student01', '0000-00-00'),
+(8, '01234', 'hi', 'fes', 'sefs', 2, 'g@g.com', '@Student01', '0000-00-00');
 
 --
 -- Indexes for dumped tables
@@ -151,31 +152,31 @@ INSERT INTO `students` (`stud_id`, `stud_code`, `stud_fname`, `stud_mname`, `stu
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`admin_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `facultys`
 --
 ALTER TABLE `facultys`
-  ADD PRIMARY KEY (`faculty_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sections`
 --
 ALTER TABLE `sections`
-  ADD PRIMARY KEY (`class_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
-  ADD PRIMARY KEY (`set_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
-  ADD PRIMARY KEY (`stud_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -185,31 +186,31 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `facultys`
 --
 ALTER TABLE `facultys`
-  MODIFY `faculty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `set_id` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `stud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

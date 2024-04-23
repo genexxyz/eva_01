@@ -61,7 +61,7 @@ class Model extends Database
         return false;
     }
 
-    public function update($id, $data, $column)
+    public function update($id, $data, $column = "id")
     {
         $keys = array_keys($data);
         $query = "update $this->table set ";
@@ -81,7 +81,7 @@ class Model extends Database
     }
 
 
-    public function update1($id, $data, $column = 'set_id')
+    public function update1($id, $data, $column = 'id')
     {
         // Get column names from $data array
         $keys = array_keys($data);
@@ -114,7 +114,7 @@ class Model extends Database
     public function classList()
     {
 
-        $query = "SELECT class_id,concat(class_course,' - ',class_level,class_section) as `class` FROM sections";
+        $query = "SELECT id,concat(class_course,' - ',class_level,class_section) as `class` FROM sections";
         //$query = "select * from $this->table";
         $result = $this->query($query);
 
@@ -123,7 +123,7 @@ class Model extends Database
         if ($result) {
             // Convert the result into an associative array
             foreach ($result as $row) {
-                $classList[$row->class_id] = $row->class;
+                $classList[$row->id] = $row->class;
             }
         }
 

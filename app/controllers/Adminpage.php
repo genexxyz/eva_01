@@ -55,25 +55,31 @@ class Adminpage extends Controller
     {
         $setting = new Setting();
 
-        if (count($_POST) > 0) {
-            $_POST[('set_id')] = "1";
+        if (isset($_POST['btn_settings'])) {
+            $arr['set_systemname'] = $_POST['systemname'];
+            $arr['set_theme'] = $_POST['themeColor'];
+            //$arr['set_logo'] = $_POST['photo'];
+            $arr['set_schoolname'] = $_POST['schoolname'];
+            $arr['set_sem'] = $_POST['semester'];
+            $arr['set_acadyear'] = $_POST['acadyear'];
+
 
             // Check if file is uploaded
             if (!empty($_FILES['photo']['tmp_name'])) {
-                $uploadDir = ROOT . "/" . 'resources/';
+                $uploadDir = '../public/resources/';
                 $uploadFile = $uploadDir . 'logo.' . pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
                 $logoName = 'logo.' . pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-                $existingLogoFile = $uploadDir . $_POST['set_logo'];
+                $existingLogoFile = $uploadDir . $_SESSION['logo'];
 
                 // Delete existing logo file if it exists
                 if (file_exists($existingLogoFile)) {
-                    unlink($existingLogoFile);
+                    unlink($uploadFile);
                 }
 
                 // Move uploaded file to destination folder
                 if (move_uploaded_file($_FILES['photo']['tmp_name'], '../public/resources/' . 'logo.' . pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION))) {
                     // Update logo in database
-                    $_POST['set_logo'] = $logoName;
+                    $arr['set_logo'] = $logoName;
 
 
                     // Update session with new logo path
@@ -82,11 +88,10 @@ class Adminpage extends Controller
                     echo 'Error uploading file.';
                 }
             }
-
-            $setting->update('1', $_POST, "set_id");
-            //$setting->update1('1', $arr);
+            $setting->update('1', $arr);
             settingUpdate();
-            //redirect('/user');
+            $currentPage = isset($_SESSION['currentPage']) ? $_SESSION['currentPage'] : 'dashboard';
+            redirect('adminpage/' . $currentPage);
         }
     }
 
@@ -105,7 +110,6 @@ class Adminpage extends Controller
             } else {
                 $addStudent->insert($_POST);
             }
-
         }
     }
 }

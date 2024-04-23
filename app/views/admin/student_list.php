@@ -35,9 +35,9 @@
                             <td class="px-5 py-2"><?= $item->stud_lname . ", "  . $item->stud_fname . " "  . $item->stud_mname ?></td>
                             <td class="text-center py-2"><?= isset($class[$item->stud_class]) ? $class[$item->stud_class] : 'N/A' ?></td>
                             <td class="text-start py-2"><?= $item->stud_email ?></td>
-                            <td class="d-flex justify-content-center py-2"><button class="btn btn-success" type="button">
+                            <td class="d-flex justify-content-center py-2"><a href="<?= md5($item->id) ?>" class="btn btn-success">
                                     <i class="fa fa-eye" ></i>
-                                </button></td>
+                                </a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -104,7 +104,7 @@
         <select id="sectionSelect" class="form-select" required name="stud_class">
             <option value="">Search</option>
             <?php foreach ($classOption as $option) { ?>
-                <option value="<?= $option->class_id ?>"><?= $option->class_course . "-" . $option->class_level . $option->class_section ?></option>
+                <option value="<?= $option->id ?>"><?= $option->class_course . "-" . $option->class_level . $option->class_section ?></option>
             <?php } ?>
         </select>
     </div>

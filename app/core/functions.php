@@ -17,7 +17,7 @@ function redirect($path)
 function showAlert($message, $type = 'info')
 {
     // Set the alert type (info, success, warning, danger)
-    
+
     switch ($type) {
         case 'success':
             $iconClass = 'fa fa-check-circle';
@@ -44,9 +44,10 @@ function showAlert($message, $type = 'info')
 </div>';
 }
 
-function showAlertOnce($message, $type = 'info', $alertname) {
+function showAlertOnce($message, $type = 'info', $alertname)
+{
     if (!isset($_SESSION[$alertname]) || !$_SESSION[$alertname]) {
-        
+
         return showAlert($message, $type);
     }
     return ''; // Return empty string if alert has already been shown
@@ -65,12 +66,17 @@ function getErrorMessageIfEmpty($inputs, $fieldNames)
 }
 
 
-function settingUpdate(){
+function settingUpdate()
+{
     $set = new Setting();
-        $_SESSION['systemname'] = $set->getSetting('set_systemname');
-        $_SESSION['theme'] = $set->getSetting('set_theme');
-        $_SESSION['logo'] = $set->getSetting('set_logo');
-        $_SESSION['schoolname'] = $set->getSetting('set_schoolname');
-        $_SESSION['semester'] = $set->getSetting('set_sem');
-        $_SESSION['acadyear'] = $set->getSetting('set_acadyear');
+    $setId = ['id' => 1];
+    $settings = $set->where($setId);
+    foreach ($settings as $set) {
+        $_SESSION['systemname'] = $set->set_systemname;
+        $_SESSION['theme'] = $set->set_theme;
+        $_SESSION['logo'] = $set->set_logo;
+        $_SESSION['schoolname'] = $set->set_schoolname;
+        $_SESSION['semester'] = $set->set_sem;
+        $_SESSION['acadyear'] = $set->set_acadyear;
+    }
 }

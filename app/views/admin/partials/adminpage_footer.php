@@ -14,36 +14,36 @@
             </div>
             <div class="modal-body">
                 <!-- Form inside the modal -->
-                <form id="settingsForm" method="post" action="<?= ROOT ?>/adminpage/settings" enctype="multipart/form-data">
+                <form id="settingsForm" method="post" action="<?=ROOT?>/adminpage/settings" enctype="multipart/form-data">
                     <div class="form-group m-2">
                         <img src="public/resources/<?= $_SESSION['logo'] ?>" alt="Logo" class="brand-logo border border-1 border-black w-25">
                         <div class="brand-info">
                             <label class="custom-file-label" for="customFile">Choose file</label>
-                            <input type="file" class="custom-file-input" id="customFile" name="set_logo" accept="image/*">
+                            <input type="file" class="custom-file-input" id="customFile" name="photo" accept="image/*">
                         </div>
                     </div>
                     <div class="form-group mb-2">
                         <label for="systemName">System Name:</label>
-                        <input name="set_systemname" type="text" class="form-control" id="systemName" placeholder="EVA-01" value="<?= $_SESSION['systemname'] ?>">
+                        <input name="systemname" type="text" class="form-control" id="systemName" placeholder="EVA-01" value="<?= $_SESSION['systemname'] ?>">
                     </div>
                     <div class="form-group mb-2">
                         <label for="schoolName">School:</label>
-                        <input name="set_schoolname" type="text" class="form-control" id="schoolName" placeholder="Enter school name" value="<?= $_SESSION['schoolname'] ?>">
+                        <input name="schoolname" type="text" class="form-control" id="schoolName" placeholder="Enter school name" value="<?= $_SESSION['schoolname'] ?>">
                     </div>
                     <div class="form-group mb-2">
                         <div class="row d-flex justify-content-start">
                             <div class="col-6"><label for="semester">Semester:</label>
-                                <input name="set_sem" type="text" class="form-control" id="semester" placeholder="Enter semester" value="<?= $_SESSION['semester'] ?>">
+                                <input name="semester" type="text" class="form-control" id="semester" placeholder="Enter semester" value="<?= $_SESSION['semester'] ?>">
                             </div>
                             <div class="col-6">
                                 <label for="acadYear">Academic Year:</label>
-                                <input name="set_acadyear" type="text" class="form-control" id="acadYear" placeholder="Enter Academic Year" value="<?= $_SESSION['acadyear'] ?>">
+                                <input name="acadyear" type="text" class="form-control" id="acadYear" placeholder="Enter Academic Year" value="<?= $_SESSION['acadyear'] ?>">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="themeColor">Theme:</label>
-                        <select class="form-control" id="themeColor" name="set_theme">
+                        <select class="form-control" id="themeColor" name="themeColor">
                             <?php
                             $themes = array(
                                 'evamaroon' => 'Maroon',
@@ -68,7 +68,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button name="btn_settings" type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
                 <!-- You can add additional buttons here -->
             </div>
